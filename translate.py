@@ -2,7 +2,7 @@ from transformers import AutoModelForSeq2SeqLM, NllbTokenizer
 
 tokenizer_en2mn = NllbTokenizer.from_pretrained("tokenizer_en2mn/")
 tokenizer_mn2en = NllbTokenizer.from_pretrained("tokenizer_mn2en/")
-model = AutoModelForSeq2SeqLM.from_pretrained("models/")
+model = AutoModelForSeq2SeqLM.from_pretrained("facebook/nllb-200-distilled-600M")
 
 def translate_mn2en(text, tokenizer_mn2en=tokenizer_mn2en, model=model):
     inputs = tokenizer_mn2en(text, return_tensors="pt")
