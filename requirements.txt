@@ -2,3 +2,4 @@ torch
 sentencepiece
 transformers
 fastapi[all]
+uvicorn

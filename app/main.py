@@ -1,17 +1,22 @@
 from fastapi import FastAPI
 from translate import translate_en2mn, translate_mn2en
+from pydantic import BaseModel
 
 app = FastAPI()
 
-@app.get("/translate")
-def get_translation(
-    text: str,
-    direction: str = 'en2mn'
+class Input(BaseModel):
+    text: str
+
+@app.post("/translate/english-to-mongolian")
+def get_translation_en2mn(
+    input: Input
 ):
-    if direction == 'en2mn':
-        result = translate_en2mn(text)
-    elif direction == 'mn2en':
-        result = translate_mn2en(text)
-    else:
-        Exception('The options are: mn2en, en2mn ')
+    result = translate_en2mn(input.text)
+    return {'result': result}
+
+@app.post("/translate/mongolian-to-english")
+def get_translation(
+    input: Input
+):
+    result = translate_mn2en(input.text)
     return {'result': result}
